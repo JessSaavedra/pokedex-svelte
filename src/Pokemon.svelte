@@ -1,5 +1,6 @@
 <script>
   export let url;
+  export let onClick;
   import { onMount } from 'svelte';
 
   let pokemon = {};
@@ -13,7 +14,7 @@
 
 </script>
 
-<div class="pokemon">
+<div class="pokemon" on:click={onClick}>
   {#if pokemon}
     <p>{pokemon.name}</p>
     {#if pokemon.sprites}
@@ -29,7 +30,7 @@
   .pokemon {
     border-radius: 2em;
     box-shadow: 0 0 2em 0 rgba(0, 0, 0, 0.08);
-    grid-column-end: span 2;
+    grid-column-end: span 3;
     padding: 1em;
   }
 </style>
