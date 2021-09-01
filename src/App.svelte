@@ -18,6 +18,10 @@
 
 </script>
 
+<svelte:head>
+	<title>Pokedex</title>
+</svelte:head>
+
 <main>
 	<div class="pokemons">
 		<SelectedPokemon url={selectedPokemonUrl}/>
