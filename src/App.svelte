@@ -2,14 +2,13 @@
 	import { onMount } from 'svelte';
 	import Pokemon from './Pokemon.svelte';
 	import SelectedPokemon from './SelectedPokemon.svelte';
+	import PokemonRepository from '../repositories/PokemonRepository';
 
 	let pokemons = [];
 	let selectedPokemonUrl;
 
 	onMount(async () => {
-		const res = await fetch(`https://pokeapi.co/api/v2/pokemon`);
-		let response = await res.json();
-		pokemons = response.results
+		pokemons = await new PokemonRepository().getAll();
 	});
 
 	function selectPokemon(event, pokemonUrl) {
@@ -23,7 +22,7 @@
 </svelte:head>
 
 <main>
-	<div class="pokemons">
+	<div class="pokedex">
 		<SelectedPokemon url={selectedPokemonUrl}/>
 		{#each pokemons as pokemon}
 			<Pokemon url={pokemon.url} onClick={(event) => selectPokemon(event, pokemon.url)}/>
@@ -43,7 +42,7 @@
 		max-width: 70rem;
 	}
 
-	.pokemons {
+	.pokedex {
 		display: grid;
 		gap: 1em;
 		grid-template-columns: repeat(12, 1fr);

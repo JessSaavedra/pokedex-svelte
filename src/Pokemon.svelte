@@ -4,6 +4,7 @@
   export let url;
   export let onClick;
   import { onMount } from 'svelte';
+  import Sprite from './Sprite.svelte';
 
   let pokemon = {};
   let types = [];
@@ -26,9 +27,7 @@
         <p class="type">{pokemonType.type.name}</p>
       {/each}
     </div>
-    {#if pokemon.sprites}
-      <img class="sprite" src={pokemon.sprites.front_default} alt={pokemon.name}/>
-    {/if}
+    <Sprite pokemon={pokemon} classname="common"/>
   {/if}
 </div>
 
@@ -72,12 +71,5 @@
     background-color: rgba(255, 255, 255, 0.4);
     border-radius: 2rem;
     padding: 0.25em 1em;
-  }
-
-  .sprite {
-    align-self: flex-end;
-    margin-left: auto;
-    position: relative;
-    z-index: 1;
   }
 </style>
