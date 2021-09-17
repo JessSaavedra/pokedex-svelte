@@ -5,7 +5,7 @@
 	import PokemonRepository from '../repositories/PokemonRepository';
 
 	let pokemons = [];
-	let selectedPokemonUrl;
+	let selectedPokemonUrl = 'https://pokeapi.co/api/v2/pokemon/1';
 
 	onMount(async () => {
 		pokemons = await new PokemonRepository().getAll();

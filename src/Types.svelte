@@ -1,5 +1,5 @@
 <script>
-  export let types = [];
+  export let types;
 </script>
 
 <h2>Types</h2>

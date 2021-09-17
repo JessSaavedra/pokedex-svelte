@@ -1,29 +1,24 @@
 <script>
-  import getBackgroundColor from '../utils/getBackgroundColor';
+  export let url;
 
-  export let url = 'https://pokeapi.co/api/v2/pokemon/1';
   import { beforeUpdate } from 'svelte';
+  import getBackgroundColor from '../utils/getBackgroundColor';
+  import isEmpty from '../utils/isEmpty';
+
+  import PokemonRepository from '../repositories/PokemonRepository';
   import Moves from './Moves.svelte';
   import Types from './Types.svelte';
   import Abilities from './Abilities.svelte';
-  import isEmpty from '../utils/isEmpty';
-  import PokemonRepository from '../repositories/PokemonRepository';
   import Info from './Info.svelte';
 
   let pokemon = {};
-  let types = [];
-  let abilities = [];
-  let moves = [];
-  let typeColor = '';
+  let typeColor;
 
   $: isLoading = isEmpty(pokemon)
 
   beforeUpdate(async () => {
     pokemon = await new PokemonRepository().get(url)
-    types = pokemon.types;
-    abilities = pokemon.abilities;
-    moves = pokemon.moves;
-    typeColor = getBackgroundColor(types[0].type);
+    typeColor = getBackgroundColor(pokemon.types);
   });
 
 </script>
@@ -33,11 +28,11 @@
     <Info pokemon={pokemon} typeColor={typeColor}/>
     <div class="grid">
       <div>
-        <Types types={types} />
-        <Abilities abilities={abilities} />
+        <Types types={pokemon.types}/>
+        <Abilities abilities={pokemon.abilities} />
       </div>
       <div>
-        <Moves moves={moves} />
+        <Moves moves={pokemon.moves} />
       </div>
     </div>
   </div>

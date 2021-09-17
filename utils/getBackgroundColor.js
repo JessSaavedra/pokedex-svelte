@@ -1,4 +1,5 @@
-function getBackgroundColor(mainType) {
+function getBackgroundColor(types) {
+  const mainType = types[0].type
   switch (mainType.name) {
     case 'grass':
       return '#5BD0B1'

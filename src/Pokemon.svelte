@@ -14,7 +14,7 @@
     const res = await fetch(url);
     pokemon = await res.json();
     types = pokemon.types;
-    backgroundColor = getBackgroundColor(types[0].type);
+    backgroundColor = getBackgroundColor(types);
   });
 
 </script>
